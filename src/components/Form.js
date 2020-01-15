@@ -1,14 +1,30 @@
-import React, {useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import { CategoriesContext } from '../context/CategoriesContext';
 
 
 const Form = () => {
 
-    const { categories } = useContext(CategoriesContext)
+    //crear state local para guardar la busqueda
+    const [ search, setSearch ] = useState({
+        name: '',
+        categorie: ''
+    });
+
+    //leer los contenidos
+    const getRecipeData = e => {
+        setSearch({
+            ...search,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    //recoger categorias desde el context
+    const { categories } = useContext(CategoriesContext);
 
     return(
         <form
             className="col-12"
+            onChange={getRecipeData}
         >
             <fieldset className="text-center">
                 <legend>Search drinks by categorie or ingredient</legend>
