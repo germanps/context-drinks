@@ -7,7 +7,7 @@ const Form = () => {
 
     //crear state local para guardar la busqueda
     const [ search, setSearch ] = useState({
-        name: '',
+        ingredient: '',
         categorie: ''
     });
 
@@ -22,7 +22,7 @@ const Form = () => {
     //recoger categorias desde el context
     const { categories } = useContext(CategoriesContext);
     //recoger búsqueda desde el context
-    const { searchRecipes } = useContext(RecipesContext);
+    const { searchRecipes, setConsult } = useContext(RecipesContext);
 
     return(
         <form
@@ -31,6 +31,7 @@ const Form = () => {
             onSubmit={ e => {
                 e.preventDefault()
                 searchRecipes(search);
+                setConsult(true);
             } }
             
         >
@@ -40,10 +41,10 @@ const Form = () => {
             <div className="row mt-4">
                 <div className="col-md-4">
                     <input 
-                        name="name"
+                        name="ingredient"
                         className="form-control"
                         type="text"
-                        placeholder="Name of drink"
+                        placeholder="Ingredient of drink"
                     />
                 </div>
                 <div className="col-md-4">
