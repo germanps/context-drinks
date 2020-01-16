@@ -7,7 +7,7 @@ export const RecipesContext = createContext();
 const RecipesProvider = (props) => {
 
     //Crear states del context
-    const [name, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([]);
     const [search, searchRecipes] = useState({
         ingredient: '',
         categorie: ''
@@ -33,6 +33,7 @@ const RecipesProvider = (props) => {
     return(
         <RecipesContext.Provider
             value={{
+                recipes,
                 searchRecipes,
                 setConsult
             }}
