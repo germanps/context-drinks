@@ -39,10 +39,24 @@ const Recipe = ({recipe}) => {
         setOpen(false);
     }
 
+    //Formatear info de los ingredientes
+    const showIngredients = info => {
+        let ingredients = [];
+        for (let i = 1; i < 16; i++) {
+           if(info[`strIngredient${i}`] !== null && info[`strIngredient${i}`] !== ''){
+                ingredients.push(
+                    <li key={i}>
+                        {info[`strIngredient${i}: `]} {info[`strMeasure${i}`]}
+                    </li>
+                )
+           }       
+        }
+        return ingredients;
+    }
+
 
     //extraer valores del context
-    const { setIdRecipe } = useContext(ModalContext);
-
+    const { inforecipe, setIdRecipe, setInfoRecipe } = useContext(ModalContext);
 
     return(
         <div id={recipe.idDrink} className="col-md-4 mb-3">
@@ -69,13 +83,21 @@ const Recipe = ({recipe}) => {
                         open={open}
                         onClose={() => {
                             handleClose();
-                            setIdRecipe(null)//reset id cuando se cierra el modal
+                            setIdRecipe(null);//reset id cuando se cierra el modal
+                            setInfoRecipe({});//reset de la recipe para que no salga previamente en el modal al elegir la siguiente
                         }}
                         
                         
                     >
                         <div style={modalStyle} className={classes.paper}>
-                            <h1>desde el modal</h1>
+                            <h2>{inforecipe.strDrink}</h2>
+                            <h3 className="mt-4">Instruccions</h3>
+                            <p>{inforecipe.strInstructions}</p>
+                            <img className="img-fluid my-4" src={inforecipe.strDrinkThumb} />
+                            <h3>Ingredients</h3>
+                            <ul>
+                                {showIngredients(inforecipe)}
+                            </ul>
                         </div>
                     </Modal>
                 </div>
