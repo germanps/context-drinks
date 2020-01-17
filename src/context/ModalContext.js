@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import axion from 'axios';
+import axios from 'axios';
 
 //crear context
 export const ModalContext = createContext();
